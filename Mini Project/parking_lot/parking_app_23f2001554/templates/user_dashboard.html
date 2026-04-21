@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - Vehicle Parking App{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-car"></i> Welcome, {{ current_user.username }}!</h2>
+</div>
+
+<!-- Current Reservation Alert -->
+{% if current_reservation %}
+<div class="alert alert-info">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h5 class="alert-heading"><i class="fas fa-parking"></i> Currently Parked</h5>
+            <p class="mb-1">
+                <strong>Vehicle:</strong> {{ current_reservation.vehicle_number }} |
+                <strong>Location:</strong> {{ current_reservation.spot.lot.prime_location_name }} |
+                <strong>Spot:</strong> {{ current_reservation.spot.spot_number }}
+            </p>
+            <small class="text-muted">
+                Parked since: {{ current_reservation.parking_timestamp.strftime('%B %d, %Y at %I:%M %p') }} |
+                Rate: ₹{{ current_reservation.spot.lot.price_per_hour }}/hour
+            </small>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ url_for('user.release_spot', reservation_id=current_reservation.id) }}" 
+               class="btn btn-warning"
+               onclick="return confirm('Are you sure you want to release this parking spot?')">
+                <i class="fas fa-sign-out-alt"></i> Release Spot
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <!-- Available Parking Lots -->
+    <div class="col-md-{% if current_reservation %}12{% else %}8{% endif %} mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-map-marked-alt"></i> Available Parking Lots</h5>
+            </div>
+            <div class="card-body">
+                {% if available_lots %}
+                    <div class="row">
+                        {% for lot_info in available_lots %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-success">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="card-title mb-0">{{ lot_info.lot.prime_location_name }}</h6>
+                                        <span class="badge bg-success">{{ lot_info.available_spots }} available</span>
+                                    </div>
+                                    
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            <i class="fas fa-map-marker-alt"></i> {{ lot_info.lot.address }}, {{ lot_info.lot.pin_code }}<br>
+                                            <i class="fas fa-rupee-sign"></i> ₹{{ lot_info.lot.price_per_hour }}/hour
+                                        </small>
+                                    </p>
+                                    
+                                    {% if not current_reservation %}
+                                    <a href="{{ url_for('user.book_spot', lot_id=lot_info.lot.id) }}" 
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-car"></i> Book Spot
+                                    </a>
+                                    {% else %}
+                                    <button class="btn btn-secondary btn-sm" disabled>
+                                        <i class="fas fa-lock"></i> Already Parked
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-car fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No parking spots available</h5>
+                        <p class="text-muted">All parking lots are currently full. Please check back later.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    {% if not current_reservation %}
+    <!-- Quick Stats -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-line"></i> Your Stats</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-history fa-2x text-primary mb-2"></i>
+                    <h4 class="mb-0">{{ past_reservations|length }}</h4>
+                    <small class="text-muted">Total Bookings</small>
+                </div>
+                
+                {% if past_reservations %}
+                    {% set total_cost = past_reservations | sum(attribute='parking_cost') %}
+                    <div class="text-center">
+                        <i class="fas fa-rupee-sign fa-lg text-success"></i>
+                        <strong>₹{{ "%.2f"|format(total_cost) }}</strong>
+                        <br><small class="text-muted">Total Spent</small>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Parking History -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-history"></i> Recent Parking History</h5>
+            </div>
+            <div class="card-body">
+                {% if past_reservations %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Vehicle</th>
+                                    <th>Location</th>
+                                    <th>Spot</th>
+                                    <th>Parked Time</th>
+                                    <th>Duration</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for reservation in past_reservations %}
+                                <tr>
+                                    <td>{{ reservation.vehicle_number }}</td>
+                                    <td>{{ reservation.spot.lot.prime_location_name }}</td>
+                                    <td>{{ reservation.spot.spot_number }}</td>
+                                    <td>{{ reservation.parking_timestamp.strftime('%m/%d/%Y %I:%M %p') }}</td>
+                                    <td>{{ reservation.get_duration_str() }}</td>
+                                    <td class="text-success fw-bold">₹{{ reservation.parking_cost }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-history fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No parking history yet</h5>
+                        <p class="text-muted">Your completed parking sessions will appear here.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Instructions Card -->
+{% if not current_reservation and available_lots %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle"></i> How to Park</h5>
+                <div class="row">
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-search fa-2x text-primary mb-2"></i>
+                        <h6>1. Choose Location</h6>
+                        <small>Browse available parking lots and select one that suits you.</small>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-car fa-2x text-success mb-2"></i>
+                        <h6>2. Book Spot</h6>
+                        <small>Enter your vehicle number and get an automatically assigned spot.</small>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-parking fa-2x text-warning mb-2"></i>
+                        <h6>3. Park Vehicle</h6>
+                        <small>Drive to your assigned parking spot and park your vehicle.</small>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-sign-out-alt fa-2x text-danger mb-2"></i>
+                        <h6>4. Release Spot</h6>
+                        <small>When leaving, click "Release Spot" to calculate and pay the fee.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

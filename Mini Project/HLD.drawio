@@ -1,0 +1,413 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Page-1" id="parking-lot-hld">
+    <mxGraphModel dx="3770" dy="2048" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title-1" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=14;" value="Parking Lot Management System — High Level Design" vertex="1">
+          <mxGeometry height="30" width="420" x="-260" y="-30" as="geometry" />
+        </mxCell>
+        <mxCell id="title-2" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="A system where users can find, book, and manage parking slots in real-time." vertex="1">
+          <mxGeometry height="30" width="440" x="-260" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-header" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;" value="Functional Requirements" vertex="1">
+          <mxGeometry height="30" width="200" x="-260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="1. User should be able to search available parking slots by location and vehicle type" vertex="1">
+          <mxGeometry height="30" width="500" x="-260" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-2" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="2. User should be able to book a parking slot (Car / Bike / Truck)" vertex="1">
+          <mxGeometry height="30" width="380" x="-260" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-3" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="3. System should generate a ticket on vehicle entry with entry time and slot assigned" vertex="1">
+          <mxGeometry height="30" width="480" x="-260" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-4" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="4. System should calculate fee on vehicle exit based on time parked" vertex="1">
+          <mxGeometry height="30" width="420" x="-260" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-5" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="5. Real-time slot availability should be shown across all floors" vertex="1">
+          <mxGeometry height="30" width="380" x="-260" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-6" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="6. Admin can add/remove floors and slots, view revenue and parked vehicles" vertex="1">
+          <mxGeometry height="30" width="430" x="-260" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-7" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="7. User should receive notification on successful booking and exit receipt" vertex="1">
+          <mxGeometry height="30" width="430" x="-260" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="fr-8" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="8. Payment processing after vehicle exit" vertex="1">
+          <mxGeometry height="30" width="300" x="-260" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-header" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;" value="Non-Functional Requirements" vertex="1">
+          <mxGeometry height="30" width="200" x="-260" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="1. Target Scale: 10,000 parking lots, 1M users across the system" vertex="1">
+          <mxGeometry height="30" width="380" x="-260" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-2" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="2. CAP Theorem:" vertex="1">
+          <mxGeometry height="30" width="120" x="-260" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-2a" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Slot Booking: Strong Consistency (no double booking of same slot)" vertex="1">
+          <mxGeometry height="30" width="430" x="-245" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-2b" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Slot Availability View: Eventual Consistency (near real-time is acceptable)" vertex="1">
+          <mxGeometry height="30" width="470" x="-245" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-3" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="3. Latency: Slot search response &lt; 200ms, booking confirmation &lt; 500ms" vertex="1">
+          <mxGeometry height="30" width="430" x="-260" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr-4" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="4. High Availability: 99.9% uptime for booking service" vertex="1">
+          <mxGeometry height="30" width="340" x="-260" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-header" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;" value="Core Entities" vertex="1">
+          <mxGeometry height="30" width="200" x="-260" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="1. User (id, name, email, vehicle_info, role)" vertex="1">
+          <mxGeometry height="30" width="310" x="-260" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-2" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="2. ParkingLot (id, name, address, lat, long, total_floors)" vertex="1">
+          <mxGeometry height="30" width="360" x="-260" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-3" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="3. Floor (id, lot_id, floor_number)" vertex="1">
+          <mxGeometry height="30" width="280" x="-260" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-4" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="4. Slot (id, floor_id, slot_type [Car/Bike/Truck], is_occupied)" vertex="1">
+          <mxGeometry height="30" width="380" x="-260" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-5" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="5. Vehicle (id, user_id, number, type)" vertex="1">
+          <mxGeometry height="30" width="290" x="-260" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="ce-6" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="6. Ticket (id, vehicle_id, slot_id, entry_time, exit_time, fee, status)" vertex="1">
+          <mxGeometry height="30" width="410" x="-260" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="api-header" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;" value="API Endpoints" vertex="1">
+          <mxGeometry height="30" width="200" x="-260" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="api-user" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="User / Customer" vertex="1">
+          <mxGeometry height="30" width="130" x="-260" y="1075" as="geometry" />
+        </mxCell>
+        <mxCell id="api-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="1. GET /slots/available?lotId=&amp;vehicleType=&amp;floor=  — Get available slots" vertex="1">
+          <mxGeometry height="30" width="500" x="-260" y="1105" as="geometry" />
+        </mxCell>
+        <mxCell id="api-2" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="2. POST /parking/entry  { vehicleNumber, vehicleType, lotId }  — Vehicle entry, generate ticket" vertex="1">
+          <mxGeometry height="30" width="530" x="-260" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="api-2r" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Response: { ticketId, slotId, entryTime, slotNumber }" vertex="1">
+          <mxGeometry height="30" width="350" x="-245" y="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="api-3" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="3. POST /parking/exit  { ticketId }  — Vehicle exit, calculate fee, generate receipt" vertex="1">
+          <mxGeometry height="30" width="510" x="-260" y="1210" as="geometry" />
+        </mxCell>
+        <mxCell id="api-3r" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Response: { fee, duration, receiptId, paymentStatus }" vertex="1">
+          <mxGeometry height="30" width="360" x="-245" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="api-4" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="4. GET /tickets/history?userId=  — Get user&#39;s parking history" vertex="1">
+          <mxGeometry height="30" width="400" x="-260" y="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="api-admin" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="Admin" vertex="1">
+          <mxGeometry height="30" width="60" x="-260" y="1320" as="geometry" />
+        </mxCell>
+        <mxCell id="api-5" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="5. POST /admin/add-slot  { floorId, slotType }  — Add a new slot" vertex="1">
+          <mxGeometry height="30" width="400" x="-260" y="1350" as="geometry" />
+        </mxCell>
+        <mxCell id="api-6" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="6. DELETE /admin/slot/:slotId  — Remove a slot" vertex="1">
+          <mxGeometry height="30" width="340" x="-260" y="1385" as="geometry" />
+        </mxCell>
+        <mxCell id="api-7" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="7. GET /admin/revenue?lotId=&amp;from=&amp;to=  — Get revenue report" vertex="1">
+          <mxGeometry height="30" width="420" x="-260" y="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="api-8" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="8. GET /admin/parked-vehicles?lotId=  — List all currently parked vehicles" vertex="1">
+          <mxGeometry height="30" width="430" x="-260" y="1455" as="geometry" />
+        </mxCell>
+        <mxCell id="hld-header" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;" value="High Level Design" vertex="1">
+          <mxGeometry height="30" width="200" x="-260" y="1520" as="geometry" />
+        </mxCell>
+        <mxCell id="user-icon-1" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="-960" y="1700" as="geometry" />
+        </mxCell>
+        <mxCell id="user-icon-2" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="-960" y="1780" as="geometry" />
+        </mxCell>
+        <mxCell id="user-icon-3" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="-960" y="1860" as="geometry" />
+        </mxCell>
+        <mxCell id="user-icon-4" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="-960" y="1940" as="geometry" />
+        </mxCell>
+        <mxCell id="users-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="Users / Drivers" vertex="1">
+          <mxGeometry height="30" width="110" x="-970" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-icon-1" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="-960" y="2100" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-icon-2" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.users;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="-960" y="2170" as="geometry" />
+        </mxCell>
+        <mxCell id="admins-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="Admin Users" vertex="1">
+          <mxGeometry height="30" width="90" x="-970" y="2240" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gw-icon" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.iot_device_gateway;" value="" vertex="1">
+          <mxGeometry height="110" width="117.53" x="-758.77" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gw-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="297" width="195" x="-800" y="1770" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gw-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="API Gateway &amp; Load Balancer" vertex="1">
+          <mxGeometry height="30" width="190" x="-810" y="1935" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gw-auth" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="- Authentication (JWT)" vertex="1">
+          <mxGeometry height="30" width="150" x="-780" y="1965" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gw-authz" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="- Authorization (RBAC)" vertex="1">
+          <mxGeometry height="30" width="150" x="-780" y="1995" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gw-routing" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="- Routing &amp; Rate Limiting" vertex="1">
+          <mxGeometry height="30" width="160" x="-778" y="2025" as="geometry" />
+        </mxCell>
+        <mxCell id="e-users-gw" edge="1" parent="1" source="user-icon-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="api-gw-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-880" y="1810" />
+              <mxPoint x="-880" y="1918" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-admins-gw" edge="1" parent="1" source="admin-icon-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="api-gw-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-880" y="2130" />
+              <mxPoint x="-880" y="2050" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-24" edge="1" parent="1" source="user-svc-label" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="user-db-pg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-446" y="1610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user-svc-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=default;fillColor=none;" value="User Service" vertex="1">
+          <mxGeometry height="30" width="90" x="-514" y="1670" as="geometry" />
+        </mxCell>
+        <mxCell id="user-svc-desc" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="1. User Registration&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="130" x="-582" y="1772.5" as="geometry" />
+        </mxCell>
+        <mxCell id="user-svc-desc2" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="2. Login / JWT token" vertex="1">
+          <mxGeometry height="30" width="120" x="-572" y="1617.5" as="geometry" />
+        </mxCell>
+        <mxCell id="user-svc-desc3" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="JWT for session management" vertex="1">
+          <mxGeometry height="30" width="160" x="-612" y="1645" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-usersvc" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-598" y="1810" as="sourcePoint" />
+            <mxPoint x="-448" y="1700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user-db-pg" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.postgre_sql_instance;fillColor=#2E73B8;gradientColor=none;" value="" vertex="1">
+          <mxGeometry height="63" width="60" x="-305" y="1583.5" as="geometry" />
+        </mxCell>
+        <mxCell id="user-db-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="User DB" vertex="1">
+          <mxGeometry height="30" width="70" x="-305" y="1645" as="geometry" />
+        </mxCell>
+        <mxCell id="user-db-schema" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="- user_id, name,&lt;br&gt;- email, password_hash,&lt;br&gt;- vehicle_info, role" vertex="1">
+          <mxGeometry height="60" width="150" x="-330" y="1679" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-12" edge="1" parent="1" source="parking-svc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="parking-db-pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-16" edge="1" parent="1" source="parking-svc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="pricing-slot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-345" y="1798" />
+              <mxPoint x="-159" y="1798" />
+              <mxPoint x="-159" y="1590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="parking-svc" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=default;fillColor=none;" value="Parking Service&lt;br&gt;(Entry / Exit / Fee Calc)" vertex="1">
+          <mxGeometry height="40" width="170" x="-430" y="1892" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gw-parkingsvc" edge="1" parent="1" source="api-gw-box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="parking-svc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-gw-slotsvc" edge="1" parent="1" source="api-gw-box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-640" y="2080" />
+            </Array>
+            <mxPoint x="-430" y="2080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-18" edge="1" parent="1" source="admin-svc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-186.71432059151766" y="2220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="admin-svc" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=default;fillColor=none;" value="Admin Service&lt;br&gt;(Floors / Slots / Revenue)" vertex="1">
+          <mxGeometry height="40" width="170" x="-415" y="2200" as="geometry" />
+        </mxCell>
+        <mxCell id="step-1" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="1" vertex="1">
+          <mxGeometry height="30" width="40" x="-488" y="1926" as="geometry" />
+        </mxCell>
+        <mxCell id="step-2" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="2" vertex="1">
+          <mxGeometry height="30" width="40" x="-495" y="2095" as="geometry" />
+        </mxCell>
+        <mxCell id="step-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="3" vertex="1">
+          <mxGeometry height="30" width="40" x="-505" y="2260" as="geometry" />
+        </mxCell>
+        <mxCell id="parking-db-pg" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.postgre_sql_instance;fillColor=#2E73B8;gradientColor=none;" value="" vertex="1">
+          <mxGeometry height="63" width="60" x="-110" y="1880" as="geometry" />
+        </mxCell>
+        <mxCell id="parking-db-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="Parking / Ticket DB" vertex="1">
+          <mxGeometry height="30" width="130" x="-151" y="1832" as="geometry" />
+        </mxCell>
+        <mxCell id="parking-db-schema" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="parking_lot(id, name)&lt;br&gt;floor(id, lot_id, num)&lt;br&gt;slot(id, floor_id, type, occupied)&lt;br&gt;vehicle(id, num, type)&lt;br&gt;ticket(id, veh_id, slot_id,&lt;br&gt;entry_time, exit_time, fee)" vertex="1">
+          <mxGeometry height="100" width="170" x="-35" y="1868.5" as="geometry" />
+        </mxCell>
+        <mxCell id="redis-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="&lt;span style=&quot;font-weight: 400; text-wrap-mode: wrap;&quot;&gt;Redis Locking&lt;/span&gt;&lt;br style=&quot;font-weight: 400; text-wrap-mode: wrap;&quot;&gt;&lt;span style=&quot;font-weight: 400; text-wrap-mode: wrap;&quot;&gt;(Prevent Double&lt;/span&gt;&lt;br style=&quot;font-weight: 400; text-wrap-mode: wrap;&quot;&gt;&lt;span style=&quot;font-weight: 400; text-wrap-mode: wrap;&quot;&gt;Booking)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="55" width="105" x="128" y="2130" as="geometry" />
+        </mxCell>
+        <mxCell id="kafka-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="Kafka / Message Queue" vertex="1">
+          <mxGeometry height="30" width="170" x="-130.5" y="2501" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-9" edge="1" parent="1" source="kafka-box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="notif-svc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kafka-box" parent="1" style="whiteSpace=wrap;html=1;" value="Kafka&lt;br&gt;(Event Broker)" vertex="1">
+          <mxGeometry height="40" width="110" x="-106.5" y="2446" as="geometry" />
+        </mxCell>
+        <mxCell id="notif-svc" parent="1" style="whiteSpace=wrap;html=1;" value="Notification&lt;br&gt;Service&lt;br&gt;(FCM / APNS)" vertex="1">
+          <mxGeometry height="60" width="110" x="-353.5" y="2418" as="geometry" />
+        </mxCell>
+        <mxCell id="notif-to-users" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Notify users on&lt;br&gt;entry / exit / payment" vertex="1">
+          <mxGeometry height="40" width="160" x="-373.5" y="2498" as="geometry" />
+        </mxCell>
+        <mxCell id="pricing-header" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="Strategy / Pricing Layer" vertex="1">
+          <mxGeometry height="30" width="170" x="-1" y="1537.5" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-17" edge="1" parent="1" source="pricing-slot" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="306.00006103515625" y="1604.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pricing-slot" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;SlotAllocationStrategy&lt;br&gt;(Nearest Available Slot)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="202" x="12" y="1576.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pricing-fee" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;PricingStrategy&lt;br&gt;(Per-Hour: Car 20/hr,&lt;br&gt;Bike 10/hr, Truck 50/hr)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="200" x="14" y="1647.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pricing-vehicle" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;VehicleTypeStrategy&lt;br&gt;(Car / Bike / Truck rates)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="14" y="1722.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pricing-db-pg" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.postgre_sql_instance;fillColor=#2E73B8;gradientColor=none;" value="" vertex="1">
+          <mxGeometry height="63" width="60" x="312" y="1569.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pricing-db-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Pricing DB&lt;br&gt;(Vehicle rates,&lt;br&gt;Surge pricing)" vertex="1">
+          <mxGeometry height="60" width="120" x="285" y="1647.5" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-7" edge="1" parent="1" source="payment-svc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="kafka-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="payment-svc" parent="1" style="html=1;whiteSpace=wrap;strokeColor=none;fillColor=#0079D6;labelPosition=center;verticalLabelPosition=middle;verticalAlign=top;align=center;fontSize=12;outlineConnect=0;spacingTop=-6;fontColor=#FFFFFF;sketch=0;shape=mxgraph.sitemap.payment;" value="Payment" vertex="1">
+          <mxGeometry height="70" width="120" x="57.5" y="2494" as="geometry" />
+        </mxCell>
+        <mxCell id="payment-svc-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Payment Service&lt;br&gt;(Razorpay / Stripe)" vertex="1">
+          <mxGeometry height="40" width="140" x="57.5" y="2581" as="geometry" />
+        </mxCell>
+        <mxCell id="payment-db-pg" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.postgre_sql_instance;fillColor=#2E73B8;gradientColor=none;" value="" vertex="1">
+          <mxGeometry height="63" width="60" x="306.5" y="2494" as="geometry" />
+        </mxCell>
+        <mxCell id="payment-db-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Payment DB" vertex="1">
+          <mxGeometry height="30" width="90" x="293.5" y="2569" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-db-pg" parent="1" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.postgre_sql_instance;fillColor=#2E73B8;gradientColor=none;" value="" vertex="1">
+          <mxGeometry height="63" width="60" x="-185" y="2197" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-db-label" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Admin / Revenue DB" vertex="1">
+          <mxGeometry height="30" width="130" x="-215" y="2277" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-1" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Vehicle entry, search slots" vertex="1">
+          <mxGeometry height="30" width="180" x="-558" y="1880" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-2" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Get/Update slot availability" vertex="1">
+          <mxGeometry height="30" width="190" x="-558" y="2030" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-3" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Manage floors, slots, revenue" vertex="1">
+          <mxGeometry height="30" width="190" x="-595" y="2200" as="geometry" />
+        </mxCell>
+        <mxCell id="db-schema-detail" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;" value="DB Table Details (PostgreSQL):" vertex="1">
+          <mxGeometry height="30" width="210" x="-812" y="2329" as="geometry" />
+        </mxCell>
+        <mxCell id="db-t1" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Table: parking_lot(id, name, address, lat, long)" vertex="1">
+          <mxGeometry height="30" width="310" x="-812" y="2362" as="geometry" />
+        </mxCell>
+        <mxCell id="db-t2" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Table: floor(id, lot_id, floor_number)" vertex="1">
+          <mxGeometry height="30" width="280" x="-812" y="2392" as="geometry" />
+        </mxCell>
+        <mxCell id="db-t3" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Table: slot(id, floor_id, slot_type [Car/Bike/Truck], is_occupied)" vertex="1">
+          <mxGeometry height="30" width="390" x="-812" y="2422" as="geometry" />
+        </mxCell>
+        <mxCell id="db-t4" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Table: vehicle(id, user_id, number_plate, vehicle_type)" vertex="1">
+          <mxGeometry height="30" width="340" x="-812" y="2452" as="geometry" />
+        </mxCell>
+        <mxCell id="db-t5" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Table: ticket(id, vehicle_id, slot_id, entry_time, exit_time, fee, status)" vertex="1">
+          <mxGeometry height="30" width="430" x="-812" y="2482" as="geometry" />
+        </mxCell>
+        <mxCell id="db-t6" parent="1" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="Table: users(id, name, email, password_hash, role)" vertex="1">
+          <mxGeometry height="30" width="340" x="-812" y="2512" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-1" edge="1" parent="1" source="step-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="step-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-2" edge="1" parent="1" source="payment-db-pg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="payment-db-pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-4" edge="1" parent="1" source="payment-svc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="payment-db-pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-14" edge="1" parent="1" source="1x287UOkFm1BJk8ralvV-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="parking-db-pg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-80" y="2083" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-19" edge="1" parent="1" source="1x287UOkFm1BJk8ralvV-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="payment-svc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-339" y="2172" />
+              <mxPoint x="118" y="2172" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-5" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=default;fillColor=none;" value="Slot Service&lt;br&gt;(Availability / Allocation)" vertex="1">
+          <mxGeometry height="40" width="170" x="-424" y="2063" as="geometry" />
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-6" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="admin-svc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-695" y="2069" />
+              <mxPoint x="-695" y="2230" />
+            </Array>
+            <mxPoint x="-697.96" y="2069" as="sourcePoint" />
+            <mxPoint x="-404.99999999999994" y="2219.51" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-15" edge="1" parent="1" source="1x287UOkFm1BJk8ralvV-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.403;entryY=0.887;entryDx=0;entryDy=0;entryPerimeter=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-339" y="2138" />
+            </Array>
+            <mxPoint x="104.077" y="2124.395" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1x287UOkFm1BJk8ralvV-21" parent="1" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;" value="" vertex="1">
+          <mxGeometry height="93" width="110.71" x="85" y="2025" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}All Reservations - Vehicle Parking App{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-list-alt"></i> All Reservations</h2>
+    <div>
+        <span class="badge bg-primary fs-6">{{ reservations|length }} Total Reservations</span>
+    </div>
+</div>
+
+{% if reservations %}
+    <!-- Filter Buttons -->
+    <div class="mb-3">
+        <button class="btn btn-outline-primary" onclick="filterReservations('all')">All</button>
+        <button class="btn btn-outline-success" onclick="filterReservations('active')">Active</button>
+        <button class="btn btn-outline-secondary" onclick="filterReservations('completed')">Completed</button>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-history"></i> Reservation History</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="reservationsTable">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Vehicle</th>
+                            <th>Location</th>
+                            <th>Spot</th>
+                            <th>Parked</th>
+                            <th>Left</th>
+                            <th>Duration</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                        <tr class="reservation-row" data-status="{{ 'active' if not reservation.leaving_timestamp else 'completed' }}">
+                            <td>{{ reservation.id }}</td>
+                            <td>
+                                <strong>{{ reservation.user.username }}</strong><br>
+                                <small class="text-muted">{{ reservation.user.email }}</small>
+                            </td>
+                            <td>{{ reservation.vehicle_number }}</td>
+                            <td>{{ reservation.spot.lot.prime_location_name }}</td>
+                            <td>{{ reservation.spot.spot_number }}</td>
+                            <td>{{ reservation.parking_timestamp.strftime('%m/%d/%Y %I:%M %p') }}</td>
+                            <td>
+                                {% if reservation.leaving_timestamp %}
+                                    {{ reservation.leaving_timestamp.strftime('%m/%d/%Y %I:%M %p') }}
+                                {% else %}
+                                    <span class="text-warning">Still Parked</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ reservation.get_duration_str() }}</td>
+                            <td>
+                                {% if reservation.parking_cost %}
+                                    <span class="text-success fw-bold">₹{{ reservation.parking_cost }}</span>
+                                {% else %}
+                                    <span class="text-muted">Ongoing</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if reservation.leaving_timestamp %}
+                                    <span class="badge bg-success">Completed</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Active</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-list fa-2x mb-2"></i>
+                    <h4>{{ reservations|length }}</h4>
+                    <small>Total Reservations</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-clock fa-2x mb-2"></i>
+                    <h4>{{ reservations|rejectattr('leaving_timestamp')|list|length }}</h4>
+                    <small>Active Now</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-check-circle fa-2x mb-2"></i>
+                    <h4>{{ reservations|selectattr('leaving_timestamp')|list|length }}</h4>
+                    <small>Completed</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-rupee-sign fa-2x mb-2"></i>
+                    {% set total_revenue = reservations|selectattr('parking_cost')|sum(attribute='parking_cost') %}
+                    <h4>₹{{ "%.2f"|format(total_revenue) }}</h4>
+                    <small>Total Revenue</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-list-alt fa-4x text-muted mb-4"></i>
+        <h4 class="text-muted">No reservations yet</h4>
+        <p class="text-muted">Parking reservations will appear here once users start booking spots.</p>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function filterReservations(status) {
+    const rows = document.querySelectorAll('.reservation-row');
+    const buttons = document.querySelectorAll('.btn-outline-primary, .btn-outline-success, .btn-outline-secondary');
+    
+    // Reset button styles
+    buttons.forEach(btn => {
+        btn.className = btn.className.replace(/btn-primary|btn-success|btn-secondary/, 'btn-outline-primary');
+    });
+    
+    // Show/hide rows based on filter
+    rows.forEach(row => {
+        if (status === 'all') {
+            row.style.display = '';
+        } else {
+            const rowStatus = row.getAttribute('data-status');
+            row.style.display = rowStatus === status ? '' : 'none';
+        }
+    });
+    
+    // Update active button
+    event.target.className = event.target.className.replace('btn-outline-primary', 
+        status === 'active' ? 'btn-success' : 
+        status === 'completed' ? 'btn-secondary' : 'btn-primary');
+}
+</script>
+{% endblock %}

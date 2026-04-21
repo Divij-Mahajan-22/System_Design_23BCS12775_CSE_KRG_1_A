@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Vehicle Parking App{% endblock %}
+
+{% block content %}
+<div class="hero-section bg-primary text-white text-center py-5 rounded mb-5">
+    <div class="container">
+        <h1 class="display-4 mb-3">
+            <i class="fas fa-parking fa-lg"></i> Vehicle Parking Management System
+        </h1>
+        <p class="lead mb-4">
+            Efficient parking management for 4-wheeler vehicles with real-time availability and automated spot allocation.
+        </p>
+        {% if not current_user.is_authenticated %}
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-user-plus"></i> Register
+                </a>
+            </div>
+        {% else %}
+            <div class="d-flex justify-content-center">
+                {% if current_user.is_admin %}
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-tachometer-alt"></i> Go to Admin Dashboard
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('user.dashboard') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-car"></i> Go to Dashboard
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-map-marked-alt fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Multiple Parking Lots</h5>
+                <p class="card-text">
+                    Manage multiple parking locations with different pricing and capacity configurations.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-clock fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Real-time Availability</h5>
+                <p class="card-text">
+                    View real-time parking spot availability and automatic spot allocation for quick booking.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-calculator fa-3x text-warning mb-3"></i>
+                <h5 class="card-title">Automated Billing</h5>
+                <p class="card-text">
+                    Automatic calculation of parking fees based on duration with transparent pricing.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-users"></i> For Users</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Easy registration and login</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Browse available parking lots</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Automatic spot allocation</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Real-time booking management</li>
+                    <li class="mb-2"><i class="fas fa-check text-success"></i> Parking history and billing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-user-shield"></i> For Administrators</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check text-primary"></i> Create and manage parking lots</li>
+                    <li class="mb-2"><i class="fas fa-check text-primary"></i> Set pricing and capacity</li>
+                    <li class="mb-2"><i class="fas fa-check text-primary"></i> Monitor all parking activities</li>
+                    <li class="mb-2"><i class="fas fa-check text-primary"></i> User management and analytics</li>
+                    <li class="mb-2"><i class="fas fa-check text-primary"></i> Comprehensive reporting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not current_user.is_authenticated %}
+<div class="text-center mt-5">
+    <div class="card bg-light">
+        <div class="card-body">
+            <h5 class="card-title">Get Started Today!</h5>
+            <p class="card-text">Join our parking management system and experience hassle-free parking.</p>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-user-plus"></i> Create Your Account
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

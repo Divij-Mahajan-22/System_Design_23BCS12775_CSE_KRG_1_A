@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users - Vehicle Parking App{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-users"></i> Manage Users</h2>
+    <div>
+        <span class="badge bg-primary fs-6">{{ total_users }} Total Users</span>
+    </div>
+</div>
+
+{% if users %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-list"></i> Registered Users</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Registered</th>
+                            <th>Total Bookings</th>
+                            <th>Active Booking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>
+                                <strong>{{ user.username }}</strong>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone or 'N/A' }}</td>
+                            <td>{{ user.created_at.strftime('%m/%d/%Y') }}</td>
+                            <td>
+                                <span class="badge bg-info">{{ user.reservations|length }}</span>
+                            </td>
+                            <td>
+                                {% set active_reservation = user.reservations|selectattr('leaving_timestamp', 'none')|first %}
+                                {% if active_reservation %}
+                                    <span class="badge bg-success">
+                                        {{ active_reservation.spot.lot.prime_location_name }} - 
+                                        {{ active_reservation.spot.spot_number }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">None</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Statistics -->
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-2x mb-2"></i>
+                <h4>{{ total_users }}</h4>
+                <small>Total Users</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-user-check fa-2x mb-2"></i>
+                <h4>{{ users_with_bookings }}</h4>
+                <small>Users with Bookings</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-car fa-2x mb-2"></i>
+                <h4>{{ active_user_count }}</h4>
+                <small>Currently Parked</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <i class="fas fa-calendar fa-2x mb-2"></i>
+                <h4>{{ recent_user_count }}</h4>
+                <small>New This Week</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-users fa-4x text-muted mb-4"></i>
+        <h4 class="text-muted">No users registered yet</h4>
+        <p class="text-muted">Users will appear here once they register for the parking system.</p>
+    </div>
+{% endif %}
+{% endblock %}
